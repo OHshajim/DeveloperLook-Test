@@ -33,7 +33,7 @@ interface ExpenseFormProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
     onSubmit: (data: FormData) => void;
-    initialData?: FormData;
+    initialData?: FormData | null;
     isEditing?: boolean;
 }
 
@@ -53,7 +53,6 @@ export function ExpenseForm({
         handleSubmit,
         reset,
         setValue,
-        watch,
         formState: { errors },
     } = useForm<FormData>({
         resolver: zodResolver(formSchema),
@@ -187,7 +186,7 @@ export function ExpenseForm({
                                 <Calendar
                                     mode="single"
                                     selected={date}
-                                    onSelect={d=>setDate(d)}
+                                    onSelect={d=>setDate(d || new Date())}
                                     disabled={(date) => date > new Date()}
                                     initialFocus
                                     className="pointer-events-auto"

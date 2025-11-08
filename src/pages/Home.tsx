@@ -15,7 +15,7 @@ import { getBudget, setBudget } from "../api/budget";
 
 const Home = () => {
     const [formOpen, setFormOpen] = useState(false);
-    const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
+    const [editingExpense, setEditingExpense] = useState<Expense | any>(null);
     const [budgetAmount, setBudgetAmount] = useState<number>(getBudget());
     const [expenses, setExpenses] = useState<Expense[]>([]);
     const [selectedCategory, setSelectedCategory] = useState("all");
@@ -43,7 +43,7 @@ const Home = () => {
         toast.success("Expense deleted successfully!");
     };
 
-    const handleFormSubmit = async (data: Expense) => {
+    const handleFormSubmit = async (data: Expense|any) => {
         try {
             if (editingExpense) {
                 await updateExpenses(editingExpense._id ?? "", data);
